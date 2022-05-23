@@ -6,10 +6,10 @@ import ExploreKashmir from '../assets/ExploreKashmir.png';
 const Projects = () => {
     return (
         <>
-            <div name='work' className='w-full md:h-screen text-white bg-[#000000]'>
+            <div name='projects' className='w-full md:h-screen text-black bg-[#ffffff]'>
                 <div className='max-w-[1000px] mx-auto p-4 flex flex-col justify-center w-full h-full'>
                     <div className='pb-8'>
-                        <p className='text-4xl font-bold inline border-b-4 text-white border-white'>
+                        <p className='text-4xl font-bold inline border-b-4 text-black border-black'>
                             Projects
                         </p>
                         <p className='py-6'>Here are some of my Projects.</p>
@@ -22,20 +22,20 @@ const Projects = () => {
                             className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'
                         >
                             <div className='opacity-0 group-hover:opacity-100'>
-                                <span className='text-2xl font-bold text-black tracking-wider'>
+                                <span className='text-2xl font-bold text-white tracking-wider'>
                                     WeatherU
                                 </span>
-                                <p className=' text-black'>
+                                <p className=' text-white'>
                                     The Weather Forecast application.
                                 </p>
                                 <div className='pt-8 text-center'>
                                     <a href='https://weather-axios.netlify.app/'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-black text-white font-bold text-lg'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-black font-bold text-lg'>
                                             Demo
                                         </button>
                                     </a>
                                     <a href='https://github.com/SyedSibtainRazvi/weather-app'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-700 text-white font-bold text-lg'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-300 text-black font-bold text-lg'>
                                             Code
                                         </button>
                                     </a>
@@ -49,20 +49,20 @@ const Projects = () => {
                             className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'
                         >
                             <div className='opacity-0 group-hover:opacity-100'>
-                                <span className='text-2xl font-bold text-black tracking-wider'>
+                                <span className='text-2xl font-bold text-white tracking-wider'>
                                     WeMail
                                 </span>
-                                <p className=' text-black'>
+                                <p className=' text-white'>
                                     A clone of Gmail.
                                 </p>
                                 <div className='pt-8 text-center'>
                                     <a href='https://we-mail.netlify.app/'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-black text-white font-bold text-lg'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-black font-bold text-lg'>
                                             Demo
                                         </button>
                                     </a>
                                     <a href='https://github.com/SyedSibtainRazvi/WeMail'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-700 text-white font-bold text-lg'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-300 text-black font-bold text-lg'>
                                             Code
                                         </button>
                                     </a>
@@ -76,20 +76,20 @@ const Projects = () => {
                             className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'
                         >
                             <div className='opacity-0 group-hover:opacity-100'>
-                                <span className='text-2xl font-bold text-black tracking-wider'>
+                                <span className='text-2xl font-bold text-white tracking-wider'>
                                     Explore Kashmir
                                 </span>
-                                <p className=' text-black'>
+                                <p className=' text-white'>
                                     Awesome Tourism Website
                                 </p>
                                 <div className='pt-8 text-center'>
                                     <a href='https://syedsibtainrazvi.github.io/ExploreKashmir.github.io/'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-black text-white font-bold text-lg'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-black font-bold text-lg'>
                                             Demo
                                         </button>
                                     </a>
                                     <a href='https://github.com/SyedSibtainRazvi/ExploreKashmir.github.io'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-700 text-white font-bold text-lg'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-300 text-black font-bold text-lg'>
                                             Code
                                         </button>
                                     </a>
@@ -98,10 +98,10 @@ const Projects = () => {
                         </div>
                     </div>
                     <div className='pt-[5rem]'>
-                    <p className='text-2xl font-bold inline border-b-4 text-white border-white'>
+                    <p className='text-2xl font-bold inline border-b-4 text-black border-black'>
                         Blogs
                     </p>
-                    <p className='py-6'>And yes, I love to write as well. And I will add them here shortly. STAY TUNED!!!</p>
+                    <p className='py-8'>And yes, I love to write as well. And I will add them here shortly. STAY TUNED!!!</p>
                 </div>
                 </div>
                 
