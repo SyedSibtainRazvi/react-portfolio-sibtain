@@ -12,7 +12,7 @@ const Projects = () => {
                         <p className='text-4xl font-bold inline border-b-4 text-black border-black'>
                             Projects
                         </p>
-                        <p className='py-6'>Here are some of my Projects.</p>
+                        <p className='py-6'>Here are some of my Projects. And the rest are on my Github.</p>
                     </div>
                     <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-4'>
 
