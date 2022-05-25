@@ -5,7 +5,6 @@ import {
     FaGithub,
     FaLinkedin,
 } from 'react-icons/fa';
-import { HiOutlineMail } from 'react-icons/hi';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 import Logo from "../assets/logowhite.png";
 import Resume from '../assets/Sibtain-Resume-Front-end.pdf';
@@ -15,7 +14,7 @@ const Navbar = () => {
     const [navbar, setNavbar] = useState(false);
     const handleClick = () => setNavbar(!navbar);
     return (
-        <div className='fixed w-full h-[60px] flex justify-between items-center z-10 px-4 bg-[#000000] text-white'>
+        <div className='fixed w-full h-[60px] flex justify-between  items-center z-10 px-4 bg-[#000000] text-white'>
             <ul className='hidden md:flex'>
                 <li>
                     <Link to='home' smooth={true} duration={500}>
