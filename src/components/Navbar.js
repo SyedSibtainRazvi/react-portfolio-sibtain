@@ -5,6 +5,7 @@ import {
     FaGithub,
     FaLinkedin,
 } from 'react-icons/fa';
+import { FaBehanceSquare } from 'react-icons/fa';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 import Logo from "../assets/logowhite.png";
 import Resume from '../assets/Sibtain-Resume-Front-end.pdf';
@@ -99,6 +100,14 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#8d99ae]'>
+                        <a
+                            className='flex justify-between items-center w-full text-white'
+                            href='https://www.behance.net/syedsibtain1997'
+                        >
+                            Behance <FaBehanceSquare size={30} />
+                        </a>
+                    </li>
+                    <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#33415c]'>
                         <a
                             className='flex justify-between items-center w-full text-white'
                             href={Resume}
