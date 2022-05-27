@@ -8,7 +8,7 @@ import {
 import { FaBehanceSquare } from 'react-icons/fa';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 import Logo from "../assets/logowhite.png";
-import Resume from '../assets/Sibtain-Resume-Front-end.pdf';
+import Resume from '../assets/Syed-Resume-dev.pdf';
 import { Link } from 'react-scroll';
 
 const Navbar = () => {
