@@ -16,6 +16,9 @@ const Navbar = () => {
     const handleClick = () => setNavbar(!navbar);
     return (
         <div className='fixed w-full h-[60px] flex justify-between  items-center z-10 px-4 bg-[#000000] text-white'>
+            <div>
+                <img src={Logo} alt="Logo " style={{ width: '120px', marginRight: '1rem' }} />
+            </div>
             <ul className='hidden md:flex'>
                 <li>
                     <Link to='home' smooth={true} duration={500}>
@@ -78,9 +81,6 @@ const Navbar = () => {
                     </Link>
                 </li>
             </ul>
-            <div>
-                <img src={Logo} alt="Logo " style={{ width: '120px', marginRight: '1rem' }} />
-            </div>
             <div className=' hidden lg:flex fixed flex-col top-[35%] left-0'>
                 <ul>
                     <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#0e76a8]'>
