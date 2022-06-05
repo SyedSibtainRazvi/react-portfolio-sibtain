@@ -4,8 +4,8 @@ import { Link } from 'react-scroll';
 
 const Home = () => {
     return (
-        <div name='home' className='w-full h-screen bg-[#ffffff]'>
-            {/* Container */}
+        <div name='home' className="w-full h-screen bg-[url('./assets/bg.jpg')]">
+
             <div className='max-w-[1000px] mx-auto px-8 flex flex-col justify-center h-full'>
                 <p className='text-[#000000] text-2xl'>Hi, my name is</p>
                 <h1 className='text-4xl sm:text-7xl font-bold text-[#000000]'>
@@ -19,7 +19,7 @@ const Home = () => {
                     building responsive frontend web applications using React JS .
                 </p>
                 <div>
-                    <button className='text-[#000000] group border-2 px-6 py-3 my-4 flex items-center hover:bg-[#000000] hover:border-[#000000] hover:text-[#ffffff]'>
+                    <button className='text-[#000000] group border-2 border-[#8d99ae] px-6 py-3 my-4 flex items-center hover:bg-[#000000] hover:border-[#000000] hover:text-[#ffffff]'>
                         <Link to='projects' smooth={true} duration={500}>
                             View Projects
                         </Link>
