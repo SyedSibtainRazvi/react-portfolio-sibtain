@@ -8,7 +8,7 @@ import {
 import { FaBehanceSquare } from 'react-icons/fa';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 import Logo from "../assets/logowhite.png";
-import Resume from '../assets/Syed-Resume-dev.pdf';
+import Resume from '../assets/Syed Sibtain Resume ReactJS.pdf';
 import { Link } from 'react-scroll';
 
 const Navbar = () => {
@@ -83,7 +83,7 @@ const Navbar = () => {
             </ul>
             <div className=' hidden lg:flex fixed flex-col top-[35%] left-0'>
                 <ul>
-                    <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#0e76a8]'>
+                    <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:bg-[#118dc7] duration-300 bg-[#0e76a8]'>
                         <a
                             className='flex justify-between items-center w-full text-white'
                             href='https://www.linkedin.com/in/syed-sibtain/'
@@ -91,7 +91,7 @@ const Navbar = () => {
                             Linkedin <FaLinkedin size={30} />
                         </a>
                     </li>
-                    <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#333333]'>
+                    <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:bg-[#464646] duration-300 bg-[#333333]'>
                         <a
                             className='flex justify-between items-center w-full text-white'
                             href='https://github.com/SyedSibtainRazvi'
@@ -99,7 +99,7 @@ const Navbar = () => {
                             Github <FaGithub size={30} />
                         </a>
                     </li>
-                    <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#8d99ae]'>
+                    <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:bg-[#a1aec6] duration-300 bg-[#8d99ae]'>
                         <a
                             className='flex justify-between items-center w-full text-white'
                             href='https://www.behance.net/syedsibtain1997'

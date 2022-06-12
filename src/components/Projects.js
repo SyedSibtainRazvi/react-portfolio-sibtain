@@ -1,8 +1,8 @@
 import React from 'react';
 import WeatherU from '../assets/weather-axios.png';
-// import Wemail from '../assets/Wemail.png';
 import ExploreKashmir from '../assets/ExploreKashmir.png';
 import Webx from '../assets/webx.png';
+// import Wemail from '../assets/Wemail.png';
 
 const Projects = () => {
     return (
