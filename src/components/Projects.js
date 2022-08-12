@@ -2,7 +2,7 @@ import React from 'react';
 import WeatherU from '../assets/weather-axios.png';
 import ExploreKashmir from '../assets/ExploreKashmir.png';
 import Webx from '../assets/webx.png';
-// import Wemail from '../assets/Wemail.png';
+import Netflix from '../assets/netflix.png'
 
 const Projects = () => {
     return (
@@ -45,32 +45,6 @@ const Projects = () => {
                         </div>
 
                         {/* Project 2 */}
-                        {/* <div
-                            style={{ backgroundImage: `url(${Wemail})` }}
-                            className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'
-                        >
-                            <div className='opacity-0 group-hover:opacity-100'>
-                                <span className='text-2xl font-bold text-white tracking-wider'>
-                                    WeMail
-                                </span>
-                                <p className=' text-white'>
-                                    A clone of Gmail.
-                                </p>
-                                <div className='pt-8 text-center'>
-                                    <a href='https://we-mail.netlify.app/'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-black font-bold text-lg'>
-                                            Demo
-                                        </button>
-                                    </a>
-                                    <a href='https://github.com/SyedSibtainRazvi/WeMail'>
-                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-300 text-black font-bold text-lg'>
-                                            Code
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div> */}
-
                         {/* Project 3 */}
                         <div
                             style={{ backgroundImage: `url(${Webx})` }}
