@@ -4,7 +4,7 @@ import { HiArrowNarrowRight } from 'react-icons/hi';
 
 const Contact = () => {
   return (
-    <div name='contact' className='w-full h-screen bg-[#000000]  flex justify-center items-center p-4 pb-10 pt-[10rem]'>
+    <div name='contact' className='w-full h-screen bg-[#000000]  flex justify-center items-center p-4 pb-[8rem] pt-[10rem]'>
       <form method='POST' action="https://getform.io/f/90222247-e7c8-4d7b-ae46-15703850f272" className='flex flex-col max-w-[600px] w-full'>
         <div className='pb-8'>
           <p className='text-4xl font-bold inline border-b-4 border-white text-white'>Contact</p>

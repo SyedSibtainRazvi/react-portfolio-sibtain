@@ -8,7 +8,7 @@ const Projects = () => {
     return (
         <>
             <div name='projects' className='w-full md:h-screen text-black bg-[#ffffff]'>
-                <div className='max-w-[1000px] mx-auto p-4 pt-16 flex flex-col justify-center w-full h-full'>
+                <div className='max-w-[1000px] mx-auto p-4 pt-16 mt-[10rem] flex flex-col justify-center w-full h-full'>
                     <div className='pb-8'>
                         <p className='text-4xl font-bold inline border-b-4 text-black border-black'>
                             Projects
@@ -20,9 +20,8 @@ const Projects = () => {
                         {/* Project 1 */}
                         <div
                             style={{ backgroundImage: `url(${WeatherU})` }}
-                            className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'
-                        >
-                            <div className='opacity-0 group-hover:opacity-100'>
+                            className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'>
+                            <div className='opacity-0 group-hover:opacity-100' >
                                 <span className='text-2xl font-bold text-white tracking-wider'>
                                     WeatherU
                                 </span>
@@ -45,7 +44,6 @@ const Projects = () => {
                         </div>
 
                         {/* Project 2 */}
-                        {/* Project 3 */}
                         <div
                             style={{ backgroundImage: `url(${Webx})` }}
                             className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'
@@ -71,9 +69,8 @@ const Projects = () => {
                                 </div>
                             </div>
                         </div>
-                        
 
-                        {/* Project 4 */}
+                        {/* Project 3 */}
                         <div
                             style={{ backgroundImage: `url(${ExploreKashmir})` }}
                             className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'
@@ -99,15 +96,40 @@ const Projects = () => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Project 4 */}
+                        <div
+                            style={{ backgroundImage: `url(${Netflix})` }}
+                            className='shadow-lg shadow-[#040c16] group container rounded-md flex justify-center items-center mx-auto content-div'>
+                            <div className='opacity-0 group-hover:opacity-100'>
+                                <span className='text-2xl font-bold text-white tracking-wider'>
+                                    Netflix
+                                </span>
+                                <p className=' text-white'>
+                                    UI Clone Netflix
+                                </p>
+                                <div className='pt-8 text-center'>
+                                    <a href='https://netflix-redux-app.netlify.app/'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-white text-black font-bold text-lg'>
+                                            Demo
+                                        </button>
+                                    </a>
+                                    <a href='https://github.com/SyedSibtainRazvi/netflix-redux'>
+                                        <button className='text-center rounded-lg px-4 py-3 m-2 bg-gray-300 text-black font-bold text-lg'>
+                                            Code
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className='pt-[5rem]'>
-                    <p className='text-2xl font-bold inline border-b-4 text-black border-black'>
-                        Blogs
-                    </p>
-                    <p className='py-8'>And yes, I love to write as well. And I will add them here shortly. STAY TUNED!!!</p>
+                    <div className='pt-[5rem] mb-[10rem]'>
+                        <p className='text-2xl font-bold inline border-b-4 text-black border-black'>
+                            Blogs
+                        </p>
+                        <p className='py-8'>And yes, I love to write as well. And I will add them here shortly. STAY TUNED!!!</p>
+                    </div>
                 </div>
-                </div>
-                
             </div>
         </>
     );
