@@ -45,7 +45,7 @@ const Skills = () => {
                     </div>
                 </div>
                 <div>
-                    <p className='py-4'>I am currently exploring <b> Redux,  Material UI and Tailwind CSS</b>.</p>
+                    <p className='py-4'>I am currently exploring <b>Postgres, NextJS and Express</b>.</p>
                 </div>
             </div>
         </div>
