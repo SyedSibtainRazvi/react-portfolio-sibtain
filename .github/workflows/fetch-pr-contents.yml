@@ -25,4 +25,7 @@ jobs:
           DIFF_URL=$(echo "$RESPONSE" | jq -r '.diff_url')
 
           # Fetch full diff content
-          curl -s -
+          curl -s -H "Authorization: token $GITHUB_TOKEN" "$DIFF_URL" > pr_changes.diff
+
+          # Output the diff content
+          cat pr_changes.diff
