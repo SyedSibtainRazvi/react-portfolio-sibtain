@@ -78,7 +78,6 @@ jobs:
             if [ "$REVIEW" != "null" ] && [ -n "$REVIEW" ]; then
               # Create the comment with the review
               comment="### Documentation Review for \`$filename\`
-
               $REVIEW"
               
               # Finally post the comment
