@@ -71,15 +71,16 @@ jobs:
             if echo "$API_RESPONSE" | jq -e '.error' >/dev/null; then
               REVIEW="Error getting review: $(echo "$API_RESPONSE" | jq -r '.error.message')"
             else
-              REVIEW=$(echo "$API_RESPONSE" | jq -r '.choices[0].message.content // "No review content received"')
+              # Trim any leading/trailing whitespace and ensure proper formatting
+              REVIEW=$(echo "$API_RESPONSE" | jq -r '.choices[0].message.content // "No review content received"' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
             fi
 
             # Only proceed if we have a valid review
             if [ "$REVIEW" != "null" ] && [ -n "$REVIEW" ]; then
-              # Create the comment with the review
+              # Create the comment with the review, ensuring no extra spaces
               comment="### Documentation Review for \`$filename\`
-              
-              $REVIEW"
+
+            $REVIEW"
               
               # Finally post the comment
               curl -s -X POST \
