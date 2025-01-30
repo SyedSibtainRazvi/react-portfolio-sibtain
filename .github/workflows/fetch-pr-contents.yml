@@ -44,18 +44,18 @@ jobs:
             
             # Properly escape the prompt
             ESCAPED_PROMPT=$(echo "Please review the following documentation changes and provide a single response formatted exactly like this:
-            ### Summary
-            [Provide a brief overview of the changes]
+          ### Summary
+          [Provide a brief overview of the changes]
 
-            ### Feedback
-            [Analyze the technical accuracy and grammatical correctness and fix if necessary]
+          ### Feedback
+          [Analyze the technical accuracy and grammatical correctness and fix if necessary]
 
-            ### Suggestions
-            [Offer specific recommendations for improvement]
+          ### Suggestions
+          [Offer specific recommendations for improvement]
 
-            Here are the changes to review:
+          Here are the changes to review:
 
-            ${patch}" | jq -Rs .)
+          ${patch}" | jq -Rs .)
             
             # Send to OpenAI and WAIT for response
             API_RESPONSE=$(curl -s https://api.openai.com/v1/chat/completions \
