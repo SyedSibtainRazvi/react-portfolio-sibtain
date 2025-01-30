@@ -19,6 +19,17 @@ jobs:
         run: |
           PR_NUMBER=${{ github.event.number }}
 
+          # Define the process_review function
+          process_review() {
+            local review="$1"
+            local filename="$2"
+            # Add any processing logic here
+            echo "$review"
+          }
+
+          # Define the prompt for OpenAI
+          PROMPT="Please review the following changes to $filename:\n\n$patch"
+
           # Fetch PR details focusing on MD files
           RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
