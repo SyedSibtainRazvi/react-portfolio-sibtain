@@ -2,13 +2,15 @@ name: Fetch PR Changes
 on:
   pull_request:
     types: [opened, synchronize]
+    paths:
+      - "**.md"
 
 jobs:
   fetch-pr-changes:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
     steps:
       - name: Fetch PR Data
         env:
@@ -16,35 +18,23 @@ jobs:
         run: |
           PR_NUMBER=${{ github.event.number }}
 
-          # Fetch PR details
+          # Fetch PR details focusing on MD files
           RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER")
+            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/files")
 
-          # Debug: Print response
-          echo "API Response:"
-          echo "$RESPONSE"
-
-          # Extract Diff URL
-          DIFF_URL=$(echo "$RESPONSE" | jq -r '.diff_url')
-
-          # Debug: Print diff URL
-          echo "Diff URL:"
-          echo "$DIFF_URL"
-
-          # Fetch full diff content
-          curl -s -H "Authorization: token $GITHUB_TOKEN" "$DIFF_URL" > pr_changes.diff
-
-          # Debug: Check file size
-          ls -l pr_changes.diff
-
-          # Output the diff content
-          echo "Diff content:"
-          cat pr_changes.diff
-
-      - name: Upload PR Changes
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr-changes
-          path: pr_changes.diff
-          retention-days: 5
+          # Extract and process only MD files
+          echo "$RESPONSE" | jq -r '.[] | select(.filename | endswith(".md")) | {filename: .filename, patch: .patch} | @base64' | while read -r file; do
+            decoded=$(echo "$file" | base64 --decode)
+            filename=$(echo "$decoded" | jq -r '.filename')
+            patch=$(echo "$decoded" | jq -r '.patch')
+            
+            # Create a comment with the changes
+            comment="### Changes in \`$filename\`\n\n\`\`\`diff\n$patch\n\`\`\`"
+            
+            curl -s -X POST \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/comments" \
+              -d "{\"body\": $(echo "$comment" | jq -R -s '.')}"
+          done
