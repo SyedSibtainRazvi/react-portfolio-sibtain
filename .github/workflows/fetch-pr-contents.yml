@@ -15,6 +15,7 @@ jobs:
       - name: Fetch PR Data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           PR_NUMBER=${{ github.event.number }}
 
@@ -29,12 +30,25 @@ jobs:
             filename=$(echo "$decoded" | jq -r '.filename')
             patch=$(echo "$decoded" | jq -r '.patch')
             
-            # Create a comment with the changes
-            comment="### Changes in \`$filename\`\n\n\`\`\`diff\n$patch\n\`\`\`"
+            # Send to OpenAI and WAIT for response
+            REVIEW=$(curl -s https://api.openai.com/v1/chat/completions \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $OPENAI_API_KEY" \
+              -d "{
+                \"model\": \"gpt-4\",
+                \"messages\": [{\"role\": \"user\", \"content\": \"$PROMPT\"}],
+                \"temperature\": 0.7
+              }" | jq -r '.choices[0].message.content')
+
+            # Only after getting the response, process it
+            PROCESSED_REVIEW=$(process_review "$REVIEW" "$filename")
+
+            # Then create the comment
+            comment="### Documentation Review for \`$filename\`\n\n..."
             
+            # Finally post the comment
             curl -s -X POST \
               -H "Authorization: token $GITHUB_TOKEN" \
-              -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/comments" \
               -d "{\"body\": $(echo "$comment" | jq -R -s '.')}"
           done
