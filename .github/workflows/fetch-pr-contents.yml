@@ -1,39 +1,91 @@
-name: Fetch PR Changes
+name: PullProof
 on:
   pull_request:
     types: [opened, synchronize]
+    paths:
+      - "**.md"
+      - "**.mdx"
 
 jobs:
   fetch-pr-changes:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
     steps:
       - name: Fetch PR Data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           PR_NUMBER=${{ github.event.number }}
 
-          # Fetch PR details
+          # Define the process_review function
+          process_review() {
+            local review="$1"
+            local filename="$2"
+            # Add any processing logic here
+            echo "$review"
+          }
+
+          # Define the prompt for OpenAI
+          PROMPT="Please review the following changes to $filename:\n\n$patch"
+
+          # Fetch PR details focusing on MD files
           RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER")
+            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/files")
 
-          # Extract Diff URL
-          DIFF_URL=$(echo "$RESPONSE" | jq -r '.diff_url')
+          # Extract and process only MD and MDX files
+          echo "$RESPONSE" | jq -r '.[] | select(.filename | test("\\.(md|mdx)$")) | {filename: .filename, patch: .patch} | @base64' | while read -r file; do
+            decoded=$(echo "$file" | base64 --decode)
+            filename=$(echo "$decoded" | jq -r '.filename')
+            patch=$(echo "$decoded" | jq -r '.patch')
+            
+            # Properly escape the prompt
+            ESCAPED_PROMPT=$(echo "Please review the following documentation changes and provide a single response formatted exactly like this:
+          ### Summary
+          [Provide a brief overview of the changes]
 
-          # Fetch Diff Content
-          curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3.diff" \
-            "$DIFF_URL" > full_pr_diff.diff
+          ### Feedback
+          [Analyze the technical accuracy and grammatical correctness and fix if necessary]
 
-          # Extract only added/modified lines (skip lines starting with '-')
-          grep -E '^\+' full_pr_diff.diff | sed 's/^+//' > pr_changes.txt
+          ### Suggestions
+          [Offer specific recommendations for improvement]
 
-      - name: Upload PR Changes
-        uses: actions/upload-artifact@v3
-        with:
-          name: pr-changes
-          path: pr_changes.txt
+          Here are the changes to review:
+
+          ${patch}" | jq -Rs .)
+            
+            # Send to OpenAI and WAIT for response
+            API_RESPONSE=$(curl -s https://api.openai.com/v1/chat/completions \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $OPENAI_API_KEY" \
+              -d "{
+                \"model\": \"gpt-4\",
+                \"messages\": [{\"role\": \"user\", \"content\": ${ESCAPED_PROMPT}}],
+                \"temperature\": 0.7
+              }")
+
+            # Check if the API response contains an error
+            if echo "$API_RESPONSE" | jq -e '.error' >/dev/null; then
+              REVIEW="Error getting review: $(echo "$API_RESPONSE" | jq -r '.error.message')"
+            else
+              # Trim any leading/trailing whitespace and ensure proper formatting
+              REVIEW=$(echo "$API_RESPONSE" | jq -r '.choices[0].message.content // "No review content received"' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            fi
+
+            # Only proceed if we have a valid review
+            if [ "$REVIEW" != "null" ] && [ -n "$REVIEW" ]; then
+              # Create the comment with the review, ensuring no extra spaces
+              comment="### Documentation Review for \`$filename\`
+
+            $REVIEW"
+              
+              # Finally post the comment
+              curl -s -X POST \
+                -H "Authorization: token $GITHUB_TOKEN" \
+                "https://api.github.com/repos/${{ github.repository }}/issues/$PR_NUMBER/comments" \
+                -d "{\"body\": $(echo "$comment" | jq -R -s '.')}"
+            fi
+          done
