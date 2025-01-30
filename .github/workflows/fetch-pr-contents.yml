@@ -1,0 +1,53 @@
+name: Fetch PR Contents
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  fetch-pr-contents:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Fetch PR Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get PR number from event context
+          PR_NUMBER=${{ github.event.number }}
+
+          # Make API call to get PR details
+          RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER")
+
+          # Save response to file
+          echo "$RESPONSE" > pr_details.txt
+
+          # Extract and format relevant information
+          TITLE=$(echo "$RESPONSE" | jq -r '.title')
+          BODY=$(echo "$RESPONSE" | jq -r '.body')
+          DIFF_URL=$(echo "$RESPONSE" | jq -r '.diff_url')
+
+          # Display formatted output
+          echo "PR Title: $TITLE"
+          echo "PR Body: $BODY"
+          echo "Diff URL: $DIFF_URL"
+
+          # Get diff content
+          curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3.diff" \
+            "$DIFF_URL" > pr_diff.diff
+
+          # Output diff content
+          echo "PR Diff Content:"
+          cat pr_diff.diff
+
+      - name: Upload PR Details
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr-details
+          path: |
+            pr_details.txt
+            pr_diff.diff
