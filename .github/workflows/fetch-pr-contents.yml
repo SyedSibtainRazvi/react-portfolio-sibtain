@@ -24,16 +24,5 @@ jobs:
           # Extract Diff URL
           DIFF_URL=$(echo "$RESPONSE" | jq -r '.diff_url')
 
-          # Fetch Diff Content
-          curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3.diff" \
-            "$DIFF_URL" > full_pr_diff.diff
-
-          # Extract only added/modified lines (skip lines starting with '-')
-          grep -E '^\+' full_pr_diff.diff | sed 's/^+//' > pr_changes.txt
-
-      - name: Upload PR Changes
-        uses: actions/upload-artifact@v3
-        with:
-          name: pr-changes
-          path: pr_changes.txt
+          # Fetch full diff content
+          curl -s -
