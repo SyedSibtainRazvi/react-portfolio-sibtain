@@ -44,7 +44,6 @@ jobs:
             
             # Properly escape the prompt
             ESCAPED_PROMPT=$(echo "Please review the following documentation changes and provide a single response formatted exactly like this:
-
             ### Summary
             [Provide a brief overview of the changes]
 
