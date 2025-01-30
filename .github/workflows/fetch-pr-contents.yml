@@ -29,3 +29,10 @@ jobs:
 
           # Output the diff content
           cat pr_changes.diff
+
+      - name: Upload PR Changes
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-changes
+          path: pr_changes.diff
+          retention-days: 5
