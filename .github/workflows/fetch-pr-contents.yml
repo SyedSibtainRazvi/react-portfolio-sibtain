@@ -42,11 +42,16 @@ jobs:
             patch=$(echo "$decoded" | jq -r '.patch')
             
             # Properly escape the prompt
-            ESCAPED_PROMPT=$(echo "Please review the following documentation changes and provide your feedback in three distinct sections:
+            ESCAPED_PROMPT=$(echo "Please review the following documentation changes and provide a single response formatted exactly like this:
 
-            1. Summary: Provide a brief overview of the changes
-            2. Feedback: Analyze the technical accuracy and grammatical correctness
-            3. Suggestions: Offer specific recommendations for improvement
+            ### Summary
+            [Provide a brief overview of the changes]
+
+            ### Feedback
+            [Analyze the technical accuracy and grammatical correctness]
+
+            ### Suggestions
+            [Offer specific recommendations for improvement]
 
             Here are the changes to review:
 
@@ -71,22 +76,10 @@ jobs:
 
             # Only proceed if we have a valid review
             if [ "$REVIEW" != "null" ] && [ -n "$REVIEW" ]; then
-              # Only after getting the response, process it
-              PROCESSED_REVIEW=$(process_review "$REVIEW" "$filename")
-
-              # Then create the comment with proper structure
+              # Create the comment with the review
               comment="### Documentation Review for \`$filename\`
 
-              #### Summary
-              ${PROCESSED_REVIEW#*Summary:}
-              ${PROCESSED_REVIEW%%Feedback:*}
-
-              #### Feedback
-              ${PROCESSED_REVIEW#*Feedback:}
-              ${PROCESSED_REVIEW%%Suggestions:*}
-
-               #### Suggestions
-              ${PROCESSED_REVIEW#*Suggestions:}"
+              $REVIEW"
               
               # Finally post the comment
               curl -s -X POST \
