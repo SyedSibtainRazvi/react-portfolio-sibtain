@@ -54,8 +54,8 @@ jobs:
             # Only after getting the response, process it
             PROCESSED_REVIEW=$(process_review "$REVIEW" "$filename")
 
-            # Then create the comment
-            comment="### Documentation Review for \`$filename\`\n\n..."
+            # Then create the comment with the actual review content
+            comment="### Documentation Review for \`$filename\`\n\n$PROCESSED_REVIEW"
             
             # Finally post the comment
             curl -s -X POST \
