@@ -12,8 +12,6 @@ author: "Syed Sibtain"
 Introduction
 The security and user experience of web application is significant impacted by user authentications. Authentication systems are essential for variety of purposes, including facilitating a seamless login processes, store user data securely, and enabling access to personalize content. Of all the authentication techniques out there, Google Sign-In are most widely used, dependable and user-friendly.
 
-By the time you finish read this blog, you'll have a working authentications system that lets users login with their Google accounts, improving your Next.js app's security and user experience. Using this comprehensive guide, I'll walk you thru the process of setting up Google Sign-In in a Next.js applications.
-
 Starting with Google Cloud Console
 Step 1: Create a Google Developer Project
 For our Next.js app to support Google Sign-In, we must first create a Google Developer Project. The credentials, APIs, and configurations for our app is all managed centrally by this project.
