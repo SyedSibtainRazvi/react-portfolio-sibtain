@@ -9,4 +9,4 @@ jobs:
         uses: SyedSibtainRazvi/PullProof@v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          grok_api_key: ${{ secrets.GROQ_API_KEY }}
